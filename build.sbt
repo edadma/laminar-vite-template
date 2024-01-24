@@ -1,29 +1,34 @@
- import org.scalajs.linker.interface.ModuleSplitStyle
+import org.scalajs.linker.interface.ModuleSplitStyle
 
-lazy val livechart = project.in(file("."))
-  .enablePlugins(ScalaJSPlugin) // Enable the Scala.js plugin in this project
+ThisBuild / licenses += "ISC" -> url("https://opensource.org/licenses/ISC")
+ThisBuild / versionScheme := Some("semver-spec")
+
+publish / skip := true
+
+lazy val root = project
+  .in(file("."))
+  .enablePlugins(ScalaJSPlugin)
+  //  .enablePlugins(ScalablyTypedConverterPlugin)
   .settings(
-    scalaVersion := "3.2.2",
-
-    // Tell Scala.js that this is an application with a main method
+    name := "laminar-vite-template",
+    version := "0.0.1",
+    scalaVersion := "3.3.1",
+    organization := "io.github.edadma",
+    githubOwner := "edadma",
+    githubRepository := name.value,
+    libraryDependencies += "com.raquo" %%% "laminar" % "16.0.0",
+    libraryDependencies += "io.github.cquiroz" %%% "scala-java-time" % "2.5.0",
+    libraryDependencies += "org.scala-js" %%% "scalajs-dom" % "2.4.0",
+    //    libraryDependencies += "com.lihaoyi" %%% "pprint" % "0.8.1",
+    jsEnv := new org.scalajs.jsenv.nodejs.NodeJSEnv(),
     scalaJSUseMainModuleInitializer := true,
-
-    /* Configure Scala.js to emit modules in the optimal way to
-     * connect to Vite's incremental reload.
-     * - emit ECMAScript modules
-     * - emit as many small modules as possible for classes in the "livechart" package
-     * - emit as few (large) modules as possible for all other classes
-     *   (in particular, for the standard library)
-     */
     scalaJSLinkerConfig ~= {
       _.withModuleKind(ModuleKind.ESModule)
         .withModuleSplitStyle(
-          ModuleSplitStyle.SmallModulesFor(List("livechart")))
+          ModuleSplitStyle.SmallModulesFor(List("laminar_vite_template"))
+        )
     },
-
-    /* Depend on the scalajs-dom library.
-     * It provides static types for the browser DOM APIs.
-     */
-    libraryDependencies += "org.scala-js" %%% "scalajs-dom" % "2.4.0",
+    publishMavenStyle := true,
+    Test / publishArtifact := false,
+    licenses += "ISC" -> url("https://opensource.org/licenses/ISC"),
   )
-  
