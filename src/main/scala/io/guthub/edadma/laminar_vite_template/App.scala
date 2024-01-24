@@ -18,8 +18,8 @@ def App =
     a(
       href := "https://laminar.dev",
       target := "_blank",
-      img(src := laminarLogo, className := "logo", alt := "laminar logo"),
+      img(src := laminarLogo, className := "logo", alt := "Laminar logo"),
     ),
     h1("Hello Laminar!"),
-    p(className := "read-the-docs", "Click on the Vite logo to learn more"),
+    p(className := "read-the-docs", "Click on the Vite logo or the Laminar logo to learn more"),
   )
