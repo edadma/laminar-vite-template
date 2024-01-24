@@ -21,5 +21,16 @@ def App =
       img(src := laminarLogo, className := "logo", alt := "Laminar logo"),
     ),
     h1("Hello Laminar!"),
+    div(className := "card", counterButton),
     p(className := "read-the-docs", "Click on the Vite logo or the Laminar logo to learn more"),
+  )
+
+def counterButton =
+  val counter = Var(0)
+
+  button(
+    typ := "button",
+    "count is ",
+    child.text <-- counter,
+    onClick --> { _ => counter.update(_ + 1) },
   )
