@@ -11,14 +11,15 @@ val laminarLogo: String = js.native
 def App =
   div(
     a(
+      cls := "inline",
       href := "https://vitejs.dev",
       target := "_blank",
-      img(src := "/vite.svg", className := "logo", alt := "Vite logo"),
+      img(src := "/vite.svg", className := "logo inline", alt := "Vite logo"),
     ),
     a(
       href := "https://laminar.dev",
       target := "_blank",
-      img(src := laminarLogo, className := "logo", alt := "Laminar logo"),
+      img(src := laminarLogo, className := "logo inline", alt := "Laminar logo"),
     ),
     h1("Hello Laminar!"),
     div(className := "card", counterButton),
@@ -29,6 +30,7 @@ def counterButton =
   val counter = Var(0)
 
   button(
+    cls := "button",
     typ := "button",
     "count is ",
     child.text <-- counter,
